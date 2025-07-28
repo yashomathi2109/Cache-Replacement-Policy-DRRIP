@@ -231,7 +231,11 @@ module drrip_cache #(
             end
             
             SEARCH_VICTIM: begin
-              if (!victim_found_reg)
+              // Use the *fresh* combinational search result so that the FSM
+              // reacts immediately in the same cycle.  Relying on
+              // victim_found_reg introduces a one-cycle latency that breaks
+              // the AGE-SEARCH handshake.
+              if (!victim_found_comb)
                      victim_next_state = AGE_ALL;
                 else
                     victim_next_state = VICTIM_FOUND;

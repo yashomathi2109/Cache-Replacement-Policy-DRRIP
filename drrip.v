@@ -203,16 +203,16 @@ module drrip_cache #(
         end
     end
     
-    // Debug: Print state after aging is committed
-    always @(posedge clk) begin
-        if (victim_state == AGE_ALL && !rst) begin
-            // This happens after the aging is committed
-            $display("Time %0t: *** AGING COMPLETE *** for set %0d", $time, set_index);
-            $display("Time %0t: After aging - Set %0d: [%0d,%0d,%0d,%0d]", $time, set_index, 
-                     rrpv_table[set_index][0], rrpv_table[set_index][1], 
-                     rrpv_table[set_index][2], rrpv_table[set_index][3]);
-        end
-    end
+//     // Debug: Print state after aging is committed
+//     always @(posedge clk) begin
+//         if (victim_state == AGE_ALL && !rst) begin
+//             // This happens after the aging is committed
+//             $display("Time %0t: *** AGING COMPLETE *** for set %0d", $time, set_index);
+//             $display("Time %0t: After aging - Set %0d: [%0d,%0d,%0d,%0d]", $time, set_index, 
+//                      rrpv_table[set_index][0], rrpv_table[set_index][1], 
+//                      rrpv_table[set_index][2], rrpv_table[set_index][3]);
+//         end
+//     end
     
     // Victim selection FSM
     always_ff @(posedge clk) begin
@@ -234,20 +234,21 @@ module drrip_cache #(
                     victim_next_state = IDLE;
             end
             
-            SEARCH_VICTIM: begin
-              if (!victim_found_reg)
-                     victim_next_state = AGE_ALL;
-                else
-                    victim_next_state = VICTIM_FOUND;
-            end
+           
             
+          SEARCH_VICTIM: begin
+    // use the fresh combinational flag
+    if (!victim_found_comb)
+        victim_next_state = AGE_ALL;
+    else
+        victim_next_state = VICTIM_FOUND;
+end
             AGE_ALL: begin
                 // After aging, check if we now have a victim
-              if (!victim_found_reg)
-                    victim_next_state = AGE_ALL ;
-                else
-                    victim_next_state = VICTIM_FOUND;  // Keep aging until we find a victim
+                  // counters.
+                victim_next_state = SEARCH_VICTIM;
             end
+            
             
             VICTIM_FOUND: begin
                 victim_next_state = IDLE;

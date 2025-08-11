@@ -110,7 +110,16 @@ The testbench covers:
 
 ## Research Background
 
-DRRIP was introduced in the paper "A Case for MLP-Aware Cache Replacement" and has been shown to provide significant improvements over traditional LRU policies, especially for workloads with mixed access patterns.
+DRRIP was introduced in the paper **"High Performance Cache Replacement Using Re-Reference Interval Prediction (RRIP)"** by Aamer Jaleel, Kevin B. Theobald, Simon C. Steely Jr., and Joel Emer from Intel Corporation. This seminal work has been shown to provide significant improvements over traditional LRU policies, especially for workloads with mixed access patterns.
+
+**Paper Reference:**
+```
+High Performance Cache Replacement Using Re-Reference Interval Prediction (RRIP)
+Aamer Jaleel†, Kevin B. Theobald‡, Simon C. Steely Jr.†, Joel Emer†
+† Intel Corporation, VSSAD, Hudson, MA
+‡ Intel Corporation, MGD, Hillsboro, OR
+{aamer.jaleel, kevin.b.theobald, simon.c.steely.jr, joel.emer}@intel.com
+```
 
 ## Dependencies
 

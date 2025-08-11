@@ -73,21 +73,7 @@ The PSEL counter tracks policy performance:
 - **`drrip_tb.v`**: Comprehensive testbench with various test scenarios
 - **`README.md`**: This documentation file
 
-## Usage
 
-### Simulation
-
-To run the testbench:
-
-```bash
-# Using ModelSim/QuestaSim
-vlog drrip.v drrip_tb.v
-vsim -c drrip_cache_tb -do "run -all; quit"
-
-# Using Icarus Verilog
-iverilog -o drrip_sim drrip.v drrip_tb.v
-vvp drrip_sim
-```
 
 ### Customization
 
@@ -131,15 +117,3 @@ DRRIP was introduced in the paper "A Case for MLP-Aware Cache Replacement" and h
 - Verilog-2001 compatible simulator
 - No external IP cores required
 - Standard synthesis tools support
-
-## License
-
-This implementation is provided for educational and research purposes.
-
-## Contributing
-
-Feel free to submit issues, feature requests, or pull requests to improve the implementation.
-
-## Contact
-
-For questions or suggestions regarding this DRRIP cache implementation, please open an issue in the repository. 
